@@ -11,16 +11,16 @@ const explosionImg = new Image();
 explosionImg.src = 'https://notaudren.github.io/rise/explosion.png'; // URL de l'image explosion.png sur votre dépôt GitHub
 
 let rocketX = canvas.width * 0.1;
-let rocketY = canvas.height - 200;
+let rocketY = canvas.height - 300; // Ajusté pour prendre en compte la taille triplée de la fusée
 const rocketWidth = 50;  // Largeur de la fusée originale
 const rocketHeight = 100; // Hauteur de la fusée originale
-const scaledRocketWidth = rocketWidth * 2;  // Largeur de la fusée doublée
-const scaledRocketHeight = rocketHeight * 2; // Hauteur de la fusée doublée
+const scaledRocketWidth = rocketWidth * 3;  // Largeur de la fusée triplée
+const scaledRocketHeight = rocketHeight * 3; // Hauteur de la fusée triplée
 
 const explosionWidth = 64; // Largeur de l'explosion originale
 const explosionHeight = 64; // Hauteur de l'explosion originale
-const scaledExplosionWidth = explosionWidth * 2;  // Largeur de l'explosion doublée
-const scaledExplosionHeight = explosionHeight * 2; // Hauteur de l'explosion doublée
+const scaledExplosionWidth = explosionWidth * 3;  // Largeur de l'explosion triplée
+const scaledExplosionHeight = explosionHeight * 3; // Hauteur de l'explosion triplée
 
 let rocketSpeedX = 2;
 let rocketSpeedY = -2;
