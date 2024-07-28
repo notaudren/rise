@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const backgroundImage = new Image();
-backgroundImage.src = 'star-background.jpg'; // Remplacez par le bon chemin
+backgroundImage.src = 'path/to/your/new/background/image.jpg'; // Remplacez par le bon chemin
 
 const rocketImage = new Image();
 rocketImage.src = 'rocket.png';
