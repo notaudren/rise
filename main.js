@@ -13,10 +13,10 @@ const explosionImage = new Image();
 explosionImage.src = 'explosion.png';
 
 let rocket = {
-    x: canvas.width / 2 - 75, // Centré horizontalement
-    y: canvas.height - 150, // La fusée commence en bas
-    width: 150, // Taille ajustée de la fusée
-    height: 150, // Taille ajustée de la fusée
+    x: canvas.width / 2 - 75 * 4, // Centré horizontalement
+    y: canvas.height / 2 - 75 * 4 - 100, // Centré verticalement avec un décalage vers le haut
+    width: 150 * 4, // Taille ajustée de la fusée (4 fois plus grande)
+    height: 150 * 4, // Taille ajustée de la fusée (4 fois plus grande)
     speed: 2,
     exploded: false
 };
@@ -86,5 +86,5 @@ window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     rocket.x = canvas.width / 2 - rocket.width / 2; // Recentre la fusée
-    rocket.y = canvas.height - 150; // Replace la fusée en bas de l'écran
+    rocket.y = canvas.height / 2 - rocket.height / 2 - 100; // Replace la fusée au centre de l'écran avec un décalage vers le haut
 });
