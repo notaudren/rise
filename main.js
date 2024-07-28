@@ -13,7 +13,7 @@ const explosionImage = new Image();
 explosionImage.src = 'explosion.png';
 
 let rocket = {
-    x: canvas.width / 2 - 50,
+    x: canvas.width / 2 - 75, // Centré horizontalement
     y: canvas.height - 150, // La fusée commence en bas
     width: 150, // Taille ajustée de la fusée
     height: 150, // Taille ajustée de la fusée
@@ -23,7 +23,7 @@ let rocket = {
 
 let backgroundY = 0;
 let multiplier = 1.00;
-let multiplierIncrement = 0.02;
+let multiplierIncrement = 0.04;
 let gameRunning = true;
 
 function drawBackground() {
@@ -55,7 +55,8 @@ function draw() {
     drawRocket();
     ctx.fillStyle = rocket.exploded ? 'red' : 'green';
     ctx.font = '80px Arial'; // Augmentation de la taille de la police
-    ctx.fillText(`x${multiplier.toFixed(2)}`, canvas.width / 2 - 50, canvas.height / 2 + canvas.height / 4); // Centré et décalé vers le bas
+    ctx.textAlign = 'center';
+    ctx.fillText(`x${multiplier.toFixed(2)}`, canvas.width / 2, canvas.height / 2 + canvas.height / 4); // Centré et décalé vers le bas
 }
 
 function gameLoop() {
@@ -79,3 +80,11 @@ backgroundImage.onload = () => {
         };
     };
 };
+
+// Redimensionne le canvas lorsque la taille de la fenêtre change
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    rocket.x = canvas.width / 2 - rocket.width / 2; // Recentre la fusée
+    rocket.y = canvas.height - 150; // Replace la fusée en bas de l'écran
+});
