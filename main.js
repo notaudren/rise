@@ -14,7 +14,7 @@ explosionImage.src = 'explosion.png';
 
 let rocket = {
     x: canvas.width / 2 - 50,
-    y: canvas.height / 2, // La fusée reste au milieu verticalement
+    y: canvas.height - 150, // La fusée commence en bas
     width: 150, // Taille ajustée de la fusée
     height: 150, // Taille ajustée de la fusée
     speed: 2,
@@ -72,6 +72,10 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-rocketImage.onload = () => {
-    gameLoop();
+backgroundImage.onload = () => {
+    rocketImage.onload = () => {
+        explosionImage.onload = () => {
+            gameLoop();
+        };
+    };
 };
