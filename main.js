@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const backgroundImage = new Image();
-backgroundImage.src = 'star-background.jpg'; // Remplacez par le bon chemin
+backgroundImage.src = 'star-background.jpg';
 
 const rocketImage = new Image();
 rocketImage.src = 'rocket.png';
@@ -13,10 +13,10 @@ const explosionImage = new Image();
 explosionImage.src = 'explosion.png';
 
 let rocket = {
-    x: canvas.width / 2 - 75 * 4, // Centré horizontalement
-    y: canvas.height / 2 - 75 * 4 - 100, // Centré verticalement avec un décalage vers le haut
-    width: 150 * 4, // Taille ajustée de la fusée (4 fois plus grande)
-    height: 150 * 4, // Taille ajustée de la fusée (4 fois plus grande)
+    x: (canvas.width / 2) - 75 * 2, // Centré horizontalement
+    y: canvas.height - 75 * 2 - 50, // Centré verticalement avec un décalage vers le haut
+    width: 150 * 2, // Taille ajustée de la fusée (4 fois plus grande)
+    height: 150 * 2, // Taille ajustée de la fusée (4 fois plus grande)
     speed: 2,
     exploded: false
 };
@@ -31,6 +31,13 @@ function drawBackground() {
     ctx.drawImage(backgroundImage, 0, backgroundY - backgroundImage.height, canvas.width, backgroundImage.height);
 }
 
+function updateBackground() {
+    backgroundY += rocket.speed / 2;
+    if (backgroundY >= backgroundImage.height) {
+        backgroundY = 0;
+    }
+}
+
 function drawRocket() {
     if (!rocket.exploded) {
         ctx.drawImage(rocketImage, rocket.x, rocket.y, rocket.width, rocket.height);
@@ -39,52 +46,46 @@ function drawRocket() {
     }
 }
 
-function update() {
-    if (gameRunning) {
-        multiplier += multiplierIncrement;
-        backgroundY += rocket.speed;
-        if (backgroundY >= backgroundImage.height) {
-            backgroundY = 0;
-        }
+function updateRocket() {
+    rocket.y -= rocket.speed;
+    if (rocket.y + rocket.height < 0) {
+        rocket.exploded = true;
     }
 }
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBackground();
-    drawRocket();
-    ctx.fillStyle = rocket.exploded ? 'red' : 'green';
-    ctx.font = '80px Arial'; // Augmentation de la taille de la police
+function drawMultiplier() {
+    ctx.font = '30px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText(`x${multiplier.toFixed(2)}`, canvas.width / 2, canvas.height * 3 / 4); // Centré et décalé vers le bas
+    if (rocket.exploded) {
+        ctx.fillStyle = 'red';
+    } else {
+        ctx.fillStyle = 'green';
+    }
+    ctx.fillText(`x${multiplier.toFixed(2)}`, canvas.width / 2, canvas.height / 2 + 50); // Position centrée
+}
+
+function updateMultiplier() {
+    if (!rocket.exploded) {
+        multiplier += multiplierIncrement;
+    }
 }
 
 function gameLoop() {
-    update();
-    draw();
-    requestAnimationFrame(gameLoop);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBackground();
+    drawRocket();
+    drawMultiplier();
+    updateBackground();
+    updateRocket();
+    updateMultiplier();
+
+    if (!rocket.exploded) {
+        requestAnimationFrame(gameLoop);
+    }
 }
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === ' ') { // Espace pour simuler l'explosion de la fusée
-        rocket.exploded = true;
-        gameRunning = false;
-        alert(`Vous avez explosé à un multiplicateur de x${multiplier.toFixed(2)}`);
-    }
-});
-
-backgroundImage.onload = () => {
-    rocketImage.onload = () => {
-        explosionImage.onload = () => {
-            gameLoop();
-        };
+rocketImage.onload = function() {
+    backgroundImage.onload = function() {
+        gameLoop();
     };
 };
-
-// Redimensionne le canvas lorsque la taille de la fenêtre change
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    rocket.x = canvas.width / 2 - rocket.width / 2; // Recentre la fusée
-    rocket.y = canvas.height / 2 - rocket.height / 2 - 100; // Replace la fusée au centre de l'écran avec un décalage vers le haut
-});
