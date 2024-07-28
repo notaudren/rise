@@ -14,16 +14,16 @@ explosionImage.src = 'explosion.png';
 
 let rocket = {
     x: canvas.width / 2 - 50,
-    y: canvas.height - 100,
-    width: 150, // Adjusted size for the rocket
-    height: 150, // Adjusted size for the rocket
+    y: canvas.height / 2, // La fusée reste au milieu verticalement
+    width: 150, // Taille ajustée de la fusée
+    height: 150, // Taille ajustée de la fusée
     speed: 2,
     exploded: false
 };
 
 let backgroundY = 0;
 let multiplier = 1.00;
-let multiplierIncrement = 0.01;
+let multiplierIncrement = 0.02;
 let gameRunning = true;
 
 function drawBackground() {
@@ -46,7 +46,6 @@ function update() {
         if (backgroundY >= backgroundImage.height) {
             backgroundY = 0;
         }
-        rocket.y -= rocket.speed;
     }
 }
 
@@ -55,8 +54,8 @@ function draw() {
     drawBackground();
     drawRocket();
     ctx.fillStyle = rocket.exploded ? 'red' : 'green';
-    ctx.font = '40px Arial';
-    ctx.fillText(`x${multiplier.toFixed(2)}`, 50, 50);
+    ctx.font = '80px Arial'; // Augmentation de la taille de la police
+    ctx.fillText(`x${multiplier.toFixed(2)}`, canvas.width / 2 - 50, canvas.height / 2 + canvas.height / 4); // Centré et décalé vers le bas
 }
 
 function gameLoop() {
@@ -66,10 +65,10 @@ function gameLoop() {
 }
 
 document.addEventListener('keydown', (event) => {
-    if (event.key === ' ') { // Space key to simulate rocket explosion
+    if (event.key === ' ') { // Espace pour simuler l'explosion de la fusée
         rocket.exploded = true;
         gameRunning = false;
-        alert(`You exploded at multiplier x${multiplier.toFixed(2)}`);
+        alert(`Vous avez explosé à un multiplicateur de x${multiplier.toFixed(2)}`);
     }
 });
 
