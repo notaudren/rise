@@ -5,10 +5,10 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const rocketImg = new Image();
-rocketImg.src = 'rocket.png';
+rocketImg.src = 'https://notaudren.github.io/rise/rocket.png'; // URL de l'image rocket.png sur votre dépôt GitHub
 
 const explosionImg = new Image();
-explosionImg.src = 'explosion.png';
+explosionImg.src = 'https://notaudren.github.io/rise/explosion.png'; // URL de l'image explosion.png sur votre dépôt GitHub
 
 let rocketX = canvas.width * 0.1;
 let rocketY = canvas.height - 100;
