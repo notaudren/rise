@@ -14,9 +14,9 @@ explosionImage.src = 'explosion.png';
 
 let rocket = {
     x: (canvas.width / 2) - 75 * 2, // Centré horizontalement
-    y: canvas.height - 75 * 2 - 50, // Centré verticalement avec un décalage vers le haut
-    width: 150 * 2, // Taille ajustée de la fusée (4 fois plus grande)
-    height: 150 * 2, // Taille ajustée de la fusée (4 fois plus grande)
+    y: (canvas.height / 2) + 50, // Centré verticalement
+    width: 75 * 4, // Taille ajustée de la fusée (4 fois plus grande)
+    height: 75 * 4, // Taille ajustée de la fusée (4 fois plus grande)
     speed: 2,
     exploded: false
 };
@@ -54,14 +54,14 @@ function updateRocket() {
 }
 
 function drawMultiplier() {
-    ctx.font = '30px Arial';
+    ctx.font = '90px Arial'; // Taille de la police augmentée
     ctx.textAlign = 'center';
     if (rocket.exploded) {
         ctx.fillStyle = 'red';
     } else {
         ctx.fillStyle = 'green';
     }
-    ctx.fillText(`x${multiplier.toFixed(2)}`, canvas.width / 2, canvas.height / 2 + 50); // Position centrée
+    ctx.fillText(`x${multiplier.toFixed(2)}`, canvas.width / 2, canvas.height / 2 + 200); // Position centrée
 }
 
 function updateMultiplier() {
