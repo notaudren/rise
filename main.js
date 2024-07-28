@@ -1,53 +1,53 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    const rocketImg = new Image();
-    rocketImg.src = 'rocket.png';
+const rocketImg = new Image();
+rocketImg.src = 'rocket.png';
 
-    const explosionImg = new Image();
-    explosionImg.src = 'explosion.png';
+const explosionImg = new Image();
+explosionImg.src = 'explosion.png';
 
-    let rocketX = 0;
-    let rocketY = canvas.height - 100;
-    let rocketSpeedX = 3;
-    let rocketSpeedY = -5;
-    let isExploded = false;
-    let explosionFrame = 0;
+let rocketX = canvas.width * 0.1;
+let rocketY = canvas.height - 100;
+const rocketWidth = 50;
+const rocketHeight = 100;
+let rocketSpeed = 2;
 
-    function drawRocket() {
-        ctx.drawImage(rocketImg, rocketX, rocketY, 50, 100);
-    }
+let multiplier = 1.00;
+let multiplierElement = document.getElementById('multiplier');
+let isExploded = false;
 
-    function drawExplosion() {
-        ctx.drawImage(explosionImg, canvas.width / 2 - 50, canvas.height / 2 - 50, 100, 100);
-    }
-
-    function update() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (!isExploded) {
-            drawRocket();
-            rocketX += rocketSpeedX;
-            rocketY += rocketSpeedY;
-
-            if (rocketY < canvas.height / 2 && rocketX > canvas.width / 2) {
-                isExploded = true;
-            }
+function update() {
+    if (!isExploded) {
+        rocketY -= rocketSpeed;
+        if (rocketY <= canvas.height / 2 - rocketHeight / 2) {
+            isExploded = true;
+            multiplierElement.style.color = 'red';
         } else {
-            if (explosionFrame < 30) {
-                drawExplosion();
-                explosionFrame++;
-            }
+            multiplier += 0.01;
+            multiplierElement.textContent = `x${multiplier.toFixed(2)}`;
         }
-
-        requestAnimationFrame(update);
     }
+}
 
-    rocketImg.onload = function() {
-        update();
-    };
-});
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (isExploded) {
+        ctx.drawImage(explosionImg, rocketX, rocketY, rocketWidth, rocketHeight);
+    } else {
+        ctx.drawImage(rocketImg, rocketX, rocketY, rocketWidth, rocketHeight);
+    }
+}
+
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+rocketImg.onload = function() {
+    gameLoop();
+};
