@@ -12,9 +12,10 @@ explosionImg.src = 'https://notaudren.github.io/rise/explosion.png'; // URL de l
 
 let rocketX = canvas.width * 0.1;
 let rocketY = canvas.height - 100;
-const rocketWidth = 50;
-const rocketHeight = 100;
-let rocketSpeed = 2;
+const rocketWidth = 100;  // Largeur de la fusée
+const rocketHeight = 200; // Hauteur de la fusée
+let rocketSpeedX = 2;
+let rocketSpeedY = -2;
 
 let multiplier = 1.00;
 let multiplierElement = document.getElementById('multiplier');
@@ -22,7 +23,8 @@ let isExploded = false;
 
 function update() {
     if (!isExploded) {
-        rocketY -= rocketSpeed;
+        rocketX += rocketSpeedX;
+        rocketY += rocketSpeedY;
         if (rocketY <= canvas.height / 2 - rocketHeight / 2) {
             isExploded = true;
             multiplierElement.style.color = 'red';
