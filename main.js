@@ -13,10 +13,10 @@ const explosionImage = new Image();
 explosionImage.src = 'explosion.png';
 
 let rocket = {
-    x: (canvas.width / 2) - 75 * 2, // Centré horizontalement
-    y: (canvas.height / 2) + 50, // Centré verticalement
-    width: 75 * 4, // Taille ajustée de la fusée (4 fois plus grande)
-    height: 75 * 4, // Taille ajustée de la fusée (4 fois plus grande)
+    x: (canvas.width / 2) - 75, // Centré horizontalement
+    y: (canvas.height / 2) - 150, // Centré verticalement
+    width: 150, // Taille ajustée de la fusée (4 fois plus grande)
+    height: 150, // Taille ajustée de la fusée (4 fois plus grande)
     speed: 2,
     exploded: false
 };
@@ -54,7 +54,7 @@ function updateRocket() {
 }
 
 function drawMultiplier() {
-    ctx.font = '90px Arial'; // Taille de la police augmentée
+    ctx.font = '120px Arial'; // Taille de la police augmentée
     ctx.textAlign = 'center';
     if (rocket.exploded) {
         ctx.fillStyle = 'red';
