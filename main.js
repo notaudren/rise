@@ -11,9 +11,17 @@ const explosionImg = new Image();
 explosionImg.src = 'https://notaudren.github.io/rise/explosion.png'; // URL de l'image explosion.png sur votre dépôt GitHub
 
 let rocketX = canvas.width * 0.1;
-let rocketY = canvas.height - 100;
-const rocketWidth = 100;  // Largeur de la fusée
-const rocketHeight = 200; // Hauteur de la fusée
+let rocketY = canvas.height - 200;
+const rocketWidth = 50;  // Largeur de la fusée originale
+const rocketHeight = 100; // Hauteur de la fusée originale
+const scaledRocketWidth = rocketWidth * 2;  // Largeur de la fusée doublée
+const scaledRocketHeight = rocketHeight * 2; // Hauteur de la fusée doublée
+
+const explosionWidth = 64; // Largeur de l'explosion originale
+const explosionHeight = 64; // Hauteur de l'explosion originale
+const scaledExplosionWidth = explosionWidth * 2;  // Largeur de l'explosion doublée
+const scaledExplosionHeight = explosionHeight * 2; // Hauteur de l'explosion doublée
+
 let rocketSpeedX = 2;
 let rocketSpeedY = -2;
 
@@ -25,7 +33,7 @@ function update() {
     if (!isExploded) {
         rocketX += rocketSpeedX;
         rocketY += rocketSpeedY;
-        if (rocketY <= canvas.height / 2 - rocketHeight / 2) {
+        if (rocketY <= canvas.height / 2 - scaledRocketHeight / 2) {
             isExploded = true;
             multiplierElement.style.color = 'red';
         } else {
@@ -38,9 +46,9 @@ function update() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (isExploded) {
-        ctx.drawImage(explosionImg, rocketX, rocketY, rocketWidth, rocketHeight);
+        ctx.drawImage(explosionImg, rocketX, rocketY, scaledExplosionWidth, scaledExplosionHeight);
     } else {
-        ctx.drawImage(rocketImg, rocketX, rocketY, rocketWidth, rocketHeight);
+        ctx.drawImage(rocketImg, rocketX, rocketY, scaledRocketWidth, scaledRocketHeight);
     }
 }
 
