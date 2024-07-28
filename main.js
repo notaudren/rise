@@ -13,7 +13,7 @@ const explosionImg = new Image();
 explosionImg.src = 'https://notaudren.github.io/rise/explosion.png';
 
 const starBgImg = new Image();
-starBgImg.src = 'https://notaudren.github.io/rise/star-background.jpg'; // Assurez-vous que cette image est grande et de bonne qualité
+starBgImg.src = 'https://notaudren.github.io/rise/star-background.jpg';
 
 let rocketX = canvas.width * 0.1;
 let rocketY = canvas.height - 300;
