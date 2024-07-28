@@ -5,21 +5,25 @@ document.addEventListener("DOMContentLoaded", function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    const rocketImg = new Image();
+    rocketImg.src = 'rocket.png';
+
+    const explosionImg = new Image();
+    explosionImg.src = 'explosion.png';
+
+    let rocketX = 0;
     let rocketY = canvas.height - 100;
-    let rocketSpeed = -2;
+    let rocketSpeedX = 3;
+    let rocketSpeedY = -5;
     let isExploded = false;
-    let explosionRadius = 0;
+    let explosionFrame = 0;
 
     function drawRocket() {
-        ctx.fillStyle = "white";
-        ctx.fillRect(canvas.width / 2 - 10, rocketY, 20, 50);
+        ctx.drawImage(rocketImg, rocketX, rocketY, 50, 100);
     }
 
     function drawExplosion() {
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, rocketY + 25, explosionRadius, 0, 2 * Math.PI);
-        ctx.fill();
+        ctx.drawImage(explosionImg, canvas.width / 2 - 50, canvas.height / 2 - 50, 100, 100);
     }
 
     function update() {
@@ -27,18 +31,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (!isExploded) {
             drawRocket();
-            rocketY += rocketSpeed;
+            rocketX += rocketSpeedX;
+            rocketY += rocketSpeedY;
 
-            if (rocketY < canvas.height / 2) {
+            if (rocketY < canvas.height / 2 && rocketX > canvas.width / 2) {
                 isExploded = true;
             }
         } else {
-            drawExplosion();
-            explosionRadius += 2;
+            if (explosionFrame < 30) {
+                drawExplosion();
+                explosionFrame++;
+            }
         }
 
         requestAnimationFrame(update);
     }
 
-    update();
+    rocketImg.onload = function() {
+        update();
+    };
 });
