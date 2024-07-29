@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="topBar">
+        <div id="balanceContainer">Balance : 100.25$</div>
+        <div id="menu">Menu</div>
+    </div>
+    <div id="gameContainer">
+        <div id="loadingContainer">
+            <div id="loadingBar"></div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div id="crashHistoryContainer"></div>
+    </div>
+    <div id="bettingContainer">
+        <div id="betPanel">
+            <div class="betInputContainer">
+                <div style="display: flex; align-items: center;">
+                    <label for="betInput" style="color: white;">Bet</label>
+                    <label class="autoLabel">Auto</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="betControls">
+                    <button class="betButton">-</button>
+                    <input type="text" id="betInput" value="1.00">
+                    <button class="betButton">+</button>
+                </div>
+                <div class="betControls">
+                    <button class="betButton">2.00</button>
+                    <button class="betButton">5.00</button>
+                </div>
+                <div class="betControls">
+                    <button class="betButton">10.00</button>
+                    <button class="betButton">ALL IN</button>
+                </div>
+            </div>
+            <div class="collectInputContainer">
+                <div style="display: flex; align-items: center;">
+                    <label for="collectInput" style="color: white;">Collect</label>
+                    <label class="autoLabel">Auto</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="collectControls">
+                    <button class="collectButton">-</button>
+                    <input type="text" id="collectInput" value="2.00">
+                    <button class="collectButton">+</button>
+                </div>
+                <button id="placeBetButton">
+                    Place your bet
+                    <span>For next round</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <audio id="launchSound" src="decollage.mp3"></audio>
+    <audio id="explosionSound" src="explosion.mp3"></audio>
+    <script src="main.js"></script>
+</body>
+</html>
